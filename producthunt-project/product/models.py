@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 class Product(models.Model):
     title = models.CharField(max_length=50)
     url = models.URLField(max_length=200)
-    pub_date = models.DateTimeField()
+    pub_date = models.DateTimeField(auto_now_add=True)
     votes_total = models.IntegerField(default=1)
     image = models.ImageField(upload_to='images/')
     icon = models.ImageField(upload_to='images/')
