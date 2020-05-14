@@ -21,7 +21,10 @@
 
     <div class='col-4'>
         <a href='{{ product.url }}'>
-            <button class='btn btn-primary btn-large btn-block'>Upvote {{ product.votes_total }}</button>
+            <form method='POST' action='{% url 'upvote' product.id %}'>
+            {% csrf_token %}
+                <button type='submit 'class='btn btn-primary btn-large btn-block'>Upvote {{ product.votes_total }}</button>
+            </form>
         </a>
     </div>
 </div>

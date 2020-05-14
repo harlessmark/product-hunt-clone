@@ -4,7 +4,9 @@ from .models import Product
 
 
 def home(request):
-    return render(request, 'product/home.html')
+    # get all Product
+    products = Product.objects
+    return render(request, 'product/home.html', {'products': products})
 
 
 @login_required
@@ -31,3 +33,14 @@ def detail(request, product_id):
     # gets specific product
     product = get_object_or_404(Product, pk=product_id)
     return render(request, 'product/detail.html', {'product': product})
+
+
+@login_required
+def upvote(request, product_id):
+    if request.method == 'POST':
+        product = get_object_or_404(Product, pk=product_id)
+        product.votes_total += 1
+        product.save()
+        return redirect(f'/product/{str(product.id)}')
+    else:
+        pass
